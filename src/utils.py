@@ -8,7 +8,7 @@ import nltk
 from nltk.corpus import stopwords
 from collections import Counter
 import xml.etree.ElementTree as ET
-nltk.download('punkt')
+nltk.download('punkt_tab')
 
 
 def parse_xml(xml_file):
