@@ -12,6 +12,8 @@ from src.frequency_analyst import frequency_analyst
 
 from streamlit_option_menu import option_menu
 
+import nltk
+nltk.download('punkt')
 st.set_page_config(layout="wide")
 
 
