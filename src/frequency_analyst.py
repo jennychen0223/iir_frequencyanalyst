@@ -310,6 +310,7 @@ def compare(documents,top_of_word, keyword_search, remove_stopwords = True):
             st.pyplot(plt)
 
         with col2:
+            st.subheader("Without Porter’s algorithm")
 
             # Display DataFrame
             df1 = pd.DataFrame(sorted_word_freq_before, columns=['Word', 'Frequency'])
@@ -318,6 +319,7 @@ def compare(documents,top_of_word, keyword_search, remove_stopwords = True):
                          use_container_width=True)
 
         with col3:
+            st.subheader("Porter’s algorithm")
 
             # Display DataFrame
             df2 = pd.DataFrame(sorted_word_freq_after, columns=['Word', 'Frequency'])
