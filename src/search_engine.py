@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
+# from streamlit_option_menu import option_menu
 import xml.etree.ElementTree as ET
 import xml.etree.ElementTree as ET
 from src.utils import parse_xml, parse_xml_to_string
