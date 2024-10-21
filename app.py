@@ -13,7 +13,7 @@ from src.frequency_analyst import frequency_analyst
 from streamlit_option_menu import option_menu
 
 import nltk
-nltk.download('punkt')
+nltk.download('punkt_tab')
 st.set_page_config(layout="wide")
 
 
