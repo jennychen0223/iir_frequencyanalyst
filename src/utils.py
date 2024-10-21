@@ -2,7 +2,7 @@ import streamlit as st
 import xml.etree.ElementTree as ET
 import re
 import os 
-import editdistance
+# import editdistance
 import numpy as np
 import nltk
 from nltk.corpus import stopwords
@@ -198,41 +198,32 @@ def parse_xml_to_string(xml_file):
             data_string += str(value)
     return data_string
 
-# def find_closest_keywords(input_word, keyword_list, num_suggestions=3):
-#     suggestions = []
-#     for keyword in keyword_list:
-#         distance = editdistance.eval(input_word, keyword)
-#         suggestions.append((keyword, distance))
-    
-#     suggestions = sorted(suggestions, key=lambda x: x[1])[:num_suggestions]
-#     return suggestions
-
 def softmax(x):
     e_x = np.exp(x - np.max(x))
     return e_x / e_x.sum()
 
-def find_closest_keywords_search_engine(input_word, keyword_list, num_suggestions=10):
-    distances = [editdistance.eval(input_word, keyword) for keyword in keyword_list]
-    softmax_probabilities = softmax(-np.array(distances))
+# def find_closest_keywords_search_engine(input_word, keyword_list, num_suggestions=10):
+#     distances = [editdistance.eval(input_word, keyword) for keyword in keyword_list]
+#     softmax_probabilities = softmax(-np.array(distances))
     
-    suggestions = list(zip(keyword_list, softmax_probabilities))
-    suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)[:num_suggestions]
+#     suggestions = list(zip(keyword_list, softmax_probabilities))
+#     suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)[:num_suggestions]
     
-    return suggestions
+#     return suggestions
 
-def find_closest_keywords(input_word, keyword_list, num_suggestions=10):
-    input_word = input_word.lower()
-    keyword_list_nomal = keyword_list 
-    keyword_list = [keyword.lower() for keyword in keyword_list]
+# def find_closest_keywords(input_word, keyword_list, num_suggestions=10):
+#     input_word = input_word.lower()
+#     keyword_list_nomal = keyword_list 
+#     keyword_list = [keyword.lower() for keyword in keyword_list]
 
     
-    distances = [editdistance.eval(input_word, keyword) for keyword in keyword_list]
-    softmax_probabilities = softmax(-np.array(distances))
+#     distances = [editdistance.eval(input_word, keyword) for keyword in keyword_list]
+#     softmax_probabilities = softmax(-np.array(distances))
     
-    suggestions = list(zip(keyword_list_nomal, softmax_probabilities))
-    suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)[:num_suggestions]
+#     suggestions = list(zip(keyword_list_nomal, softmax_probabilities))
+#     suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)[:num_suggestions]
     
-    return suggestions
+#     return suggestions
 
 
 def clean_and_tokenize(text):
