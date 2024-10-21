@@ -14,6 +14,7 @@ from streamlit_option_menu import option_menu
 
 import nltk
 nltk.download('punkt_tab')
+nltk.download('stopwords')
 st.set_page_config(layout="wide")
 
 
