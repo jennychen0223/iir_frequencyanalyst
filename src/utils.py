@@ -7,11 +7,9 @@ import numpy as np
 import nltk
 from nltk.corpus import stopwords
 from collections import Counter
-
-
 import xml.etree.ElementTree as ET
+nltk.download('punkt')
 
-import xml.etree.ElementTree as ET
 
 def parse_xml(xml_file):
     tree = ET.parse(xml_file)
