@@ -6,3 +6,4 @@ matplotlib
 bio
 tqdm
 fuzzywuzzy
+seaborn
