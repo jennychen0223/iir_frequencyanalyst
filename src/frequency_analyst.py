@@ -16,7 +16,7 @@ import nltk
 from nltk.corpus import stopwords
 from collections import Counter
 from nltk.stem import PorterStemmer
-nltk.download('punkt')
+nltk.download('punkt_tab')
 
 def zip_distribution(documents, top_of_word, keyword_search):
 
