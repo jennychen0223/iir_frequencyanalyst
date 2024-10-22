@@ -8,3 +8,4 @@ bio
 tqdm
 fuzzywuzzy
 seaborn
+editdistance
