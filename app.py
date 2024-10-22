@@ -19,19 +19,19 @@ st.set_page_config(layout="wide")
 
 
 with st.sidebar:
-    selected = option_menu("Main Menu", ["Search Engine", "Download PubMed", "Frequency Analyst"],
-                           icons=['search-heart-fill','cloud-arrow-down-fill', 'lightbulb-fill'], 
-                           menu_icon="bars", default_index=0)
-    
-    # selected = option_menu("Main Menu", ["Upload File", "Search Engine", "Download PubMed", "Frequency Analyst"],
-    #                        icons=['cloud-upload-fill', 'search-heart-fill','cloud-arrow-down-fill', 'lightbulb-fill'], 
+    # selected = option_menu("Main Menu", ["Search Engine", "Download PubMed", "Frequency Analyst"],
+    #                        icons=['search-heart-fill','cloud-arrow-down-fill', 'lightbulb-fill'], 
     #                        menu_icon="bars", default_index=0)
+    
+    selected = option_menu("Main Menu", ["Upload File", "Search Engine", "Download PubMed", "Frequency Analyst"],
+                           icons=['cloud-upload-fill', 'search-heart-fill','cloud-arrow-down-fill', 'lightbulb-fill'], 
+                           menu_icon="bars", default_index=0)
     
 if selected == "Search Engine":
     search_engine()
 
-# elif selected == "Upload File":
-#     upload_file()
+elif selected == "Upload File":
+    upload_file()
 
 elif selected == "Download PubMed":
     download_pubmed()
