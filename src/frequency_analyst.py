@@ -1,7 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import xml.etree.ElementTree as ET
-import xml.etree.ElementTree as ET
 from src.utils import parse_xml
 from src.utils import search_and_highlight
 from src.utils import *
@@ -16,7 +15,8 @@ import nltk
 from nltk.corpus import stopwords
 from collections import Counter
 from nltk.stem import PorterStemmer
-nltk.download('punkt_tab')
+
+nltk.download('punkt')
 
 def zip_distribution(documents, top_of_word, keyword_search):
 
@@ -47,13 +47,13 @@ def zip_distribution(documents, top_of_word, keyword_search):
         frequencies = [count for word, count in sorted_word_counts]
 
         # 使用Columns來佈局
-        col1, col2 = st.columns([3, 1])
+        col1, col2 = st.columns([2, 1])
 
         with col1:
 
             # 畫Zipf分布
             plt.figure(figsize=(10, 6))
-            plt.loglog(ranks, frequencies, marker='o', linestyle='--', color='r')
+            plt.plot(ranks, frequencies, marker='o', linestyle='--', color='r')
 
             # # 添加文字標籤
             # for i, (word, count) in enumerate(sorted_word_counts[:top_of_word]):  # 只標記前8個詞
@@ -112,11 +112,11 @@ def remove_stopwords(documents, top_of_word, keyword_search):
         ranks = range(1, len(sorted_word_counts) + 1)
         frequencies = [count for word, count in sorted_word_counts]
 
-        col1, col2 = st.columns([3, 1])
+        col1, col2 = st.columns([2, 1])
         with col1:
             # 畫Zipf分布
             plt.figure(figsize=(10, 6))
-            plt.loglog(ranks, frequencies, marker='o', linestyle='--', color='r')
+            plt.plot(ranks, frequencies, marker='o', linestyle='--', color='r')
 
             # 添加文字標籤，避開點的位置
             for i, (word, count) in enumerate(sorted_word_counts[:top_of_word]):
@@ -183,11 +183,11 @@ def porter_stemmer(documents, top_of_word, keyword_search, remove_stopwords = Tr
         ranks = range(1, len(sorted_word_counts) + 1)
         frequencies = [count for word, count in sorted_word_counts]
 
-        col1, col2 = st.columns([3, 1])
+        col1, col2 = st.columns([2, 1])
         with col1:
             # 畫Zipf分布
             plt.figure(figsize=(10, 6))
-            plt.loglog(ranks, frequencies, marker='o', linestyle='--', color='r')
+            plt.plot(ranks, frequencies, marker='o', linestyle='--', color='r')
 
             # # 添加文字標籤
             # for i, (word, count) in enumerate(sorted_word_counts[:8]):  # 只標記前8個詞
@@ -278,8 +278,8 @@ def compare(documents,top_of_word, keyword_search, remove_stopwords = True):
         with col1:
             # 畫Zipf分布
             plt.figure(figsize=(10, 6))
-            plt.loglog(ranks1, frequencies1, marker='o', linestyle='--', color='r', label='Without Porter’s algorithm')
-            plt.loglog(ranks2, frequencies2, marker='o', linestyle='--', color='b', label='Porter’s algorithm')
+            plt.plot(ranks1, frequencies1, marker='o', linestyle='--', color='r', label='Without Porter’s algorithm')
+            plt.plot(ranks2, frequencies2, marker='o', linestyle='--', color='b', label='Porter’s algorithm')
 
             # # 添加文字標籤，只標記前3個詞
             # for i, (word, count) in enumerate(sorted_word_freq_before[:3]):
@@ -327,8 +327,6 @@ def compare(documents,top_of_word, keyword_search, remove_stopwords = True):
             st.dataframe(df2.head(top_of_word).style.set_properties(**{'text-align': 'left'}),
                          use_container_width=True)
             
-            
-
     
 def frequency_analyst(): 
     keyword_search = ''
@@ -342,37 +340,47 @@ def frequency_analyst():
         
         if keyword_search in path_keywords: 
             st.info(f"Your keyword is {keyword_search}", icon="ℹ️")
-        elif edit_distance and len(keyword_search) > 0: 
-            suggestions = find_closest_keywords(keyword_search, path_keywords, num_suggestions = 10  )
 
-            # Create a bar chart using Seaborn
+        elif edit_distance and len(keyword_search) > 0: 
+
+            suggestions = find_closest_keywords(keyword_search, path_keywords, num_suggestions = 10)
             keywords, probabilities = zip(*suggestions)
             data = {"Keywords": keywords, "Probability": probabilities}
             df = pd.DataFrame(data)
-
-            plt.figure(figsize=(8, 4))
-            sns.set(style="whitegrid")  # Set the style to have a white grid
-            ax = sns.barplot(x="Keywords", y="Probability", data=df)
-            plt.xticks(rotation=45)
-            plt.title("Keyword Probabilities with Edit Distance")
-
-            # Add percentages on each bar
-            for p in ax.patches:
-                ax.annotate(f'{p.get_height()*100:.2f}%', (p.get_x() + p.get_width() / 2., p.get_height()),
-                            ha='center', va='center', fontsize=10, color='black', xytext=(0, 5),
-                            textcoords='offset points')
-
-            st.pyplot(plt)
-            # st.write(f"Closest keywords to '{keyword_search}' is {keywords[0]}") 
+        
             if probabilities[0] > 0.6: 
-                st.info(f"Closest keywords to '{keyword_search}': {keywords[0]}",icon="ℹ️")
+                st.info(f"Closest keywords to '{keyword_search}': {keywords[0]}", icon="ℹ️")
                 keyword_search = keywords[0]
             else:
                 st.warning("No found the keyword", icon="⚠️")
                 keyword_search = '' 
+
+            col1, col2 = st.columns([2, 1])
+
+            with col1:
+                # Create a bar chart using Seaborn               
+
+                plt.figure(figsize=(8, 4))
+                sns.set(style="whitegrid")  # Set the style to have a white grid
+                ax = sns.barplot(x="Keywords", y="Probability", data=df)
+                plt.xticks(rotation=45)
+                plt.title("Keyword Probabilities with Edit Distance")
+
+                # Add percentages on each bar
+                for p in ax.patches:
+                    ax.annotate(f'{p.get_height()*100:.2f}%', (p.get_x() + p.get_width() / 2., p.get_height()),
+                                ha='center', va='center', fontsize=10, color='black', xytext=(0, 5),
+                                textcoords='offset points')
+
+                st.pyplot(plt)
+            with col2:
+                st.dataframe(df.head(top_of_word).style.set_properties(**{'text-align': 'left'}),
+                            use_container_width=True)
+
         elif len(keyword_search) > 0: 
             st.warning("No found the keyword", icon="⚠️")
             keyword_search = ''
+
         if len(keyword_search) > 0: 
             # st.sidebar.title("Setting")
             documents = []
