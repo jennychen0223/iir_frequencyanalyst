@@ -19,7 +19,7 @@ st.set_page_config(layout="wide")
 
 
 with st.sidebar:
-    selected = option_menu("Main Menu", ["Search Engine", "Download PubMed", "Frequency Analyst", "Continuous Bag of Word"],
+    selected = option_menu("Main Menu", ["Search Engine", "Download PubMed", "Frequency Analyst", "CBOW & Skip-gram"],
                            icons=['search-heart-fill','cloud-arrow-down-fill', 'lightbulb-fill', "handbag-fill"], 
                            menu_icon="bars", default_index=0)
     
@@ -38,6 +38,6 @@ elif selected == "Download PubMed":
 
 elif selected == "Frequency Analyst":
     frequency_analyst()
-elif selected == "Continuous Bag of Word":
+elif selected == "CBOW & Skip-gram":
     bag_of_word()
 
