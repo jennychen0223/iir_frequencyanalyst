@@ -9,18 +9,18 @@ from src.search_engine import search_engine
 from src.download_pubmed import download_pubmed
 from src.frequency_analyst import frequency_analyst
 # st.set_page_config(page_title="Search Engine system")
+from src.bag_of_word import * 
 
 from streamlit_option_menu import option_menu
 
 import nltk
-nltk.download('punkt_tab')
-nltk.download('stopwords')
+nltk.download('punkt')
 st.set_page_config(layout="wide")
 
 
 with st.sidebar:
-    selected = option_menu("Main Menu", ["Search Engine", "Download PubMed", "Frequency Analyst"],
-                           icons=['search-heart-fill','cloud-arrow-down-fill', 'lightbulb-fill'], 
+    selected = option_menu("Main Menu", ["Search Engine", "Download PubMed", "Frequency Analyst", "Continuous Bag of Word"],
+                           icons=['search-heart-fill','cloud-arrow-down-fill', 'lightbulb-fill', "handbag-fill"], 
                            menu_icon="bars", default_index=0)
     
     # selected = option_menu("Main Menu", ["Upload File", "Search Engine", "Download PubMed", "Frequency Analyst"],
@@ -30,12 +30,14 @@ with st.sidebar:
 if selected == "Search Engine":
     search_engine()
 
-elif selected == "Upload File":
-    upload_file()
+# elif selected == "Upload File":
+#     upload_file()
 
 elif selected == "Download PubMed":
     download_pubmed()
 
 elif selected == "Frequency Analyst":
     frequency_analyst()
+elif selected == "Continuous Bag of Word":
+    bag_of_word()
 
