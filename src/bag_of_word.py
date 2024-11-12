@@ -14,9 +14,6 @@ def cal(words1, words2):
     word_vectors_skipgram= skipgram_model.wv
     similarity_skip = word_vectors_skipgram.similarity(words1, words2)
 
-    similarity_cbow = round(similarity_cbow, 2)
-    similarity_skip = round(similarity_skip, 2)
-
     return similarity_cbow, similarity_skip
 
 
@@ -40,5 +37,5 @@ def bag_of_word():
     if run_cbow:
         similarity_cbow, similarity_skip = cal(keyword1, keyword2)
 
-        st.write(f"Similarity between {keyword1} and {keyword2}: {similarity_cbow} with CBOW")
-        st.write(f"Similarity between {keyword1} and {keyword2}: {similarity_skip} with Skip-Gram")
+        st.write(f"Similarity between {keyword1} and {keyword2}: {similarity_cbow:.3f} with CBOW")
+        st.write(f"Similarity between {keyword1} and {keyword2}: {similarity_skip:.3f} with Skip-Gram")
