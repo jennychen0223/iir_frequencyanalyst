@@ -10,3 +10,4 @@ fuzzywuzzy
 seaborn
 editdistance
 gensim
+scipy==1.10.1
