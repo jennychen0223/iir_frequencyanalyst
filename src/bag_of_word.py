@@ -1,10 +1,6 @@
-import os
 import streamlit as st 
-import gensim
+# import gensim
 from gensim.models import Word2Vec
-import matplotlib.pyplot as plt
-import seaborn as sns
-import torch.nn as nn
 
 
 def cal(words1, words2):    
